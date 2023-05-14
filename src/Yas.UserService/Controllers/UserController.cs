@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Yas.UserService.Application.Interfaces;
 using Yas.UserService.Domain;
@@ -24,7 +25,7 @@ namespace Yas.UserService.Controllers
             return Ok(await _userProvider.GetAllAsync());
         }
 
-        [HttpGet("name:string")]
+        [HttpGet("name")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -51,11 +52,28 @@ namespace Yas.UserService.Controllers
         }
 
         [HttpDelete("name")]
-        public async Task<IActionResult> DeleteUserByName(string name)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<bool>> DeleteUserByName(string name)
         {
-            var response = await _userProvider.DeleteAsync(name);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                _logger.LogError("BadRequest for request with {@name}", name);
+                return BadRequest();
+            }
 
-            return response ? Ok() : NotFound();
+            var response = await _userProvider.DeleteAsync(name);
+            
+            if(!response)
+            {
+                string message = $"Cannot delete user with name {name}";
+                _logger.LogError(message);
+                return NotFound(message);
+            }
+
+            return Ok(response);
         }
     }
 }
