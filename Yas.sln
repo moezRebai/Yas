@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yas.UserService", "Yas.UserService\Yas.UserService.csproj", "{15520BDF-9C31-4D39-8FDE-19B4709A3E67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yas.UserService", "src\Yas.UserService\Yas.UserService.csproj", "{15520BDF-9C31-4D39-8FDE-19B4709A3E67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yas.Shared", "Yas.Shared\Yas.Shared.csproj", "{64F4640C-DFC3-4E4C-BD94-3DC75DDB5435}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yas.Shared", "src\Yas.Shared\Yas.Shared.csproj", "{64F4640C-DFC3-4E4C-BD94-3DC75DDB5435}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0ED0CD2E-4378-4CC2-90A2-44DB84B80527}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{15520BDF-9C31-4D39-8FDE-19B4709A3E67} = {0ED0CD2E-4378-4CC2-90A2-44DB84B80527}
+		{64F4640C-DFC3-4E4C-BD94-3DC75DDB5435} = {0ED0CD2E-4378-4CC2-90A2-44DB84B80527}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E44A7DAC-16BE-4DDD-9679-B74CC7117449}
